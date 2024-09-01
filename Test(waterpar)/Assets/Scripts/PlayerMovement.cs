@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform orientation;
 
     float verticalInput;
-    float horizontalInput;
+    public float horizontalInput;
     float UpInput;
 
     public Vector3 moveDirection;

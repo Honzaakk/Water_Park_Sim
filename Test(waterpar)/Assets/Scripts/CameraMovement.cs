@@ -11,11 +11,14 @@ public class CameraMovement : MonoBehaviour
 
     float RotationX;
     float RotationY;
+
+    PlayerMovement PM;
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        PM = FindObjectOfType<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -30,6 +33,7 @@ public class CameraMovement : MonoBehaviour
         RotationX = Mathf.Clamp(RotationX, -90f, 90f);
 
         transform.rotation = Quaternion.Euler(RotationX, RotationY, 0);
+       
         orientation.rotation = Quaternion.Euler(0, RotationY, 0);
     }
 }
