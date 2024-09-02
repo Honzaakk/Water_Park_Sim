@@ -41,17 +41,17 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             UpInput = 1;
-            Debug.Log(" pressing");
+            
         }
         else if (Input.GetKey(KeyCode.LeftShift))
         {
             UpInput = -1;
-            Debug.Log(" pressing");
+            
         }
         else 
         {
             UpInput = 0;
-            Debug.Log("isnt pressing");
+            
         }
         
     }
