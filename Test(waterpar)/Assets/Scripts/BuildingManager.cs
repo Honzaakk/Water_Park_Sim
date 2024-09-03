@@ -20,7 +20,7 @@ public class BuildingManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             GridModeOn = GridModeOn == true ? false : true;
             if (LastSelectedBuilding != null)
@@ -53,7 +53,8 @@ public class BuildingManager : MonoBehaviour
                 {
 
                     lastTile = hitObject.collider.gameObject;
-                    Instantiate(SelectedBuilding, new Vector3(lastTile.transform.position.x, lastTile.transform.position.y + 1.5f, lastTile.transform.position.z), Quaternion.identity);
+                    Debug.Log(SelectedBuilding.transform.position.y * 0.5f);
+                    Instantiate(SelectedBuilding, new Vector3(lastTile.transform.position.x, lastTile.transform.position.y + (SelectedBuilding.transform.localScale.y * 0.5f), lastTile.transform.position.z), Quaternion.identity);
                     if (LastSelectedBuilding != null)
                     {
                         Destroy(LastSelectedBuilding);
