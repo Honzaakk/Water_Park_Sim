@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    bool IsOcuppied;
+    public bool IsOcuppied;
 
     public GameObject TileSpaceShow;
     // Start is called before the first frame update

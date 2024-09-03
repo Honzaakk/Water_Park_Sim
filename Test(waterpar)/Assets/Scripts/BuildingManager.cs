@@ -9,6 +9,7 @@ public class BuildingManager : MonoBehaviour
 
     public GameObject SelectedBuilding;
     public GameObject LastSelectedBuilding;
+    
     public GameObject lastTile;
     // Start is called before the first frame update
     void Start()
@@ -19,25 +20,41 @@ public class BuildingManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetKey(KeyCode.Tab))
         {
-            GridModeOn = true;
-
+            GridModeOn = GridModeOn == true ? false : true;
+            if (LastSelectedBuilding != null)
+            {
+                Destroy(LastSelectedBuilding);
+            }
             ActivateGridMode();
         }
-        if(GridModeOn == true)
+        Raycast();
+        if (GridModeOn && LastSelectedBuilding != null && Input.GetMouseButton(0))
+        {
+            Destroy(LastSelectedBuilding);
+            Instantiate(LastSelectedBuilding.GetComponent<ShadowBuilding>().Building, new Vector3(lastTile.transform.position.x, lastTile.transform.position.y + 1.5f, lastTile.transform.position.z), Quaternion.identity);
+            lastTile.GetComponent<Tile>().IsOcuppied = true;
+
+        }
+
+    }
+
+    void Raycast()
+    {
+        if (GridModeOn == true)
         {
             Cursor.visible = true;
             Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            
+
             if (Physics.Raycast(mouseRay, out RaycastHit hitObject) && lastTile != hitObject.collider.gameObject)
             {
-                if(hitObject.collider.tag == "Tile")
+                if (hitObject.collider.tag == "Tile" )
                 {
-                    
+
                     lastTile = hitObject.collider.gameObject;
                     Instantiate(SelectedBuilding, new Vector3(lastTile.transform.position.x, lastTile.transform.position.y + 1.5f, lastTile.transform.position.z), Quaternion.identity);
-                    if(LastSelectedBuilding != null)
+                    if (LastSelectedBuilding != null)
                     {
                         Destroy(LastSelectedBuilding);
                     }
@@ -45,7 +62,6 @@ public class BuildingManager : MonoBehaviour
                 }
             }
         }
-        
     }
 
     void ActivateGridMode()
